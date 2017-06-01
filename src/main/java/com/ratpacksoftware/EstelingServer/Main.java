@@ -4,6 +4,7 @@ import com.ratpacksoftware.UI.ServerGui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 public class Main {
@@ -16,7 +17,9 @@ public class Main {
                 }
             }
 
-            new EstelingServer(8080).start();
+            File path = new File("database");
+            //System.out.println(path.getPath());
+            new EstelingServer(8080, path.getAbsolutePath()).start();
         } catch (IOException e) {
             e.printStackTrace();
         }

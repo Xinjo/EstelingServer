@@ -1,9 +1,11 @@
 package com.ratpacksoftware.Models;
 
+import java.io.Serializable;
+
 /**
  * Created by stijn on 1-6-2017.
  */
-public class Vote {
+public class Vote implements Serializable{
     private int interactionId;
     private int actionId;
     private boolean persistant;

@@ -2,10 +2,13 @@ package com.ratpacksoftware.EstelingServer;
 
 import com.ratpacksoftware.Managers.VoteManager;
 import com.ratpacksoftware.Web.RequestHandlers.VoteHandler;
+import com.ratpacksoftware.database.Database;
 import com.sun.net.httpserver.HttpServer;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.file.Path;
 
 /**
  * Created by Michel on 18-5-2017.
@@ -17,7 +20,9 @@ public class EstelingServer {
 
     private VoteHandler _voteHandler;
 
-    public EstelingServer(int port) throws IOException {
+    private Database _db;
+
+    public EstelingServer(int port, String dbPath) throws IOException {
         _voteManager = new VoteManager();
 
         _voteHandler = new VoteHandler(_voteManager);
@@ -26,6 +31,10 @@ public class EstelingServer {
 
         _httpServer.createContext("/api/vote/cast", _voteHandler);
         _httpServer.createContext("/api/vote/get", _voteHandler);
+
+        new File(dbPath).mkdir();
+        _db = new Database(dbPath);
+        _db.loadData();
     }
 
     public void start() {
@@ -42,5 +51,6 @@ public class EstelingServer {
 
     public void stop() {
         _httpServer.stop(1);
+        _db.saveData();
     }
 }
