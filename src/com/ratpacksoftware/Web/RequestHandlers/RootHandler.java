@@ -18,7 +18,6 @@ import java.util.Set;
 public class RootHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
-        HttpHandlerUtility.logRequest(this.getClass().getEnclosingClass().getSimpleName(), httpExchange);
 
         Headers he = httpExchange.getRequestHeaders();
         Set<Map.Entry<String, List<String>>> entries = he.entrySet();

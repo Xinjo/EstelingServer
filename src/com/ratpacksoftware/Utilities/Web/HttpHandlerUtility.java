@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class HttpHandlerUtility {
     // http://www.rgagnon.com/javadetails/java-get-url-parameters-using-jdk-http-server.html
-    public static Map<String, String> mapRequestParameters(String query) {
+    public static Map<String, String> getQueryParameters(String query) {
         Map<String, String> _mappedQuery = new HashMap<>();
 
         for (String param : query.split("&")) {
@@ -23,9 +23,5 @@ public class HttpHandlerUtility {
         }
 
         return _mappedQuery;
-    }
-
-    public static void logRequest(String className, HttpExchange request) {
-        System.out.println("[" + className+ "] Incoming request from " + request.getRemoteAddress() + ", Request URL: " + request.getRequestURI());
     }
 }

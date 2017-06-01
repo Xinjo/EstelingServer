@@ -16,7 +16,7 @@ public class Main {
                 }
             }
 
-            new EstelingServer(5327).start();
+            new EstelingServer(8080).start();
         } catch (IOException e) {
             e.printStackTrace();
         }

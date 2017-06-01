@@ -26,14 +26,18 @@ public class EstelingServer {
         _httpServer = HttpServer.create(new InetSocketAddress(port), 0);
 
         _httpServer.createContext("/", new RootHandler());
-        //_httpServer.createContext("/api/vote/cast", _voteHandler);
-        //_httpServer.createContext("/api/vote/get", _voteHandler);
+        _httpServer.createContext("/api/vote/cast", _voteHandler);
+        _httpServer.createContext("/api/vote/get", _voteHandler);
         //_httpServer.createContext("/api/beacons", null);
         //_httpServer.createContext("/api/", null);
     }
 
     public void start() {
-        _httpServer.start();
+        try {
+            _httpServer.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         System.out.println("Running EstelingServer at address: " + _httpServer.getAddress().getAddress().getCanonicalHostName() + " on port: " + _httpServer.getAddress().getPort());
 
