@@ -1,9 +1,8 @@
-package com.ratpacksoftware.Database;
+package com.ratpacksoftware.database;
 
 import com.ratpacksoftware.Models.Action;
 import com.ratpacksoftware.Models.Interaction;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
