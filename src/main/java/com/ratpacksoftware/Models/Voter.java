@@ -1,11 +1,12 @@
 package com.ratpacksoftware.Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by stijn on 1-6-2017.
  */
-public class Voter {
+public class Voter implements Serializable{
     public int id;
     public ArrayList<Vote> votes = new ArrayList<>();
 
