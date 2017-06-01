@@ -24,7 +24,7 @@ public class Database {
     public Database(String directory) {
         this.dir = directory + "\\";
         path = new File(dir + "data.json");
-        System.out.println("Database initialized in directory" + this.dir);
+        System.out.println("Database initialized in directory: " + this.dir);
     }
 
     public void loadData(){
