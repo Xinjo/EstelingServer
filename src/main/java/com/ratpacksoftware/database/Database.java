@@ -1,17 +1,8 @@
 package com.ratpacksoftware.database;
 
-import com.google.gson.stream.JsonReader;
-import com.ratpacksoftware.Models.Action;
-import com.ratpacksoftware.Models.Interaction;
-
 import java.io.*;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
 import com.google.gson.*;
-import com.ratpacksoftware.Models.Vote;
-import com.sun.org.apache.xml.internal.dtm.DTMAxisIterator;
 
 /**
  * Created by stijn on 31-5-2017.
