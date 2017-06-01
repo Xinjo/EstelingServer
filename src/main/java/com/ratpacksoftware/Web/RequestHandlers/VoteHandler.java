@@ -1,11 +1,11 @@
 package com.ratpacksoftware.Web.RequestHandlers;
 
 import com.ratpacksoftware.Managers.VoteManager;
-import com.ratpacksoftware.Utilities.Web.HttpHandlerUtility;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,10 +24,9 @@ public class VoteHandler implements HttpHandler {
         String requestPath = httpExchange.getRequestURI().getPath();
         String requestQuery = httpExchange.getRequestURI().getQuery();
 
-        Map<String, String> queryParameters = HttpHandlerUtility.getQueryParameters(requestQuery);
-
         switch(requestPath) {
             case "/api/vote/cast":
+                handleVoteGet(1, 1);
                 break;
             case "/api/vote/get":
                 break;

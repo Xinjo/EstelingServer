@@ -1,20 +1,21 @@
 package com.ratpacksoftware.Models;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by stijn on 1-6-2017.
  */
 public class Voter {
-    public int id;
+    public UUID id;
     public ArrayList<Vote> votes = new ArrayList<>();
 
-    public Voter(int id) {
+    public Voter(UUID id) {
         this.id = id;
         //send id to client
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
