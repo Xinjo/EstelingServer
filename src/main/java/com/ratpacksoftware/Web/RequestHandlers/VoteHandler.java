@@ -3,8 +3,6 @@ package com.ratpacksoftware.Web.RequestHandlers;
 import com.ratpacksoftware.Managers.BeaconManager;
 import com.ratpacksoftware.Managers.VoteManager;
 import com.ratpacksoftware.Managers.VoterManager;
-import com.ratpacksoftware.Models.Beacon;
-import com.ratpacksoftware.Models.Interaction;
 import com.ratpacksoftware.Models.Vote;
 import com.ratpacksoftware.Models.Voter;
 import com.ratpacksoftware.Web.Parsers.RequestParser;
@@ -13,7 +11,6 @@ import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
 

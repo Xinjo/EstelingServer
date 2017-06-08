@@ -2,6 +2,8 @@ package com.ratpacksoftware.Managers;
 
 import com.ratpacksoftware.Models.Beacon;
 import com.ratpacksoftware.Models.Interaction;
+import com.ratpacksoftware.Models.Vote;
+import com.ratpacksoftware.Models.VoteOption;
 
 import java.util.ArrayList;
 
@@ -45,5 +47,17 @@ public class BeaconManager {
             }
         }
         return tempBeacons;
+    }
+
+    public ArrayList<VoteOption> getVoteOptionsByInteractionId(String interactionId) {
+        for (Beacon b : _beacons) {
+            for(Interaction i : b.interactions) {
+                if(i.getId().equals(interactionId)) {
+                    return i.getVoteOptions();
+                }
+            }
+        }
+
+        return null;
     }
 }

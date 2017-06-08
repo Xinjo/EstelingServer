@@ -6,10 +6,7 @@ import com.ratpacksoftware.Managers.VoterManager;
 import com.ratpacksoftware.Models.Beacon;
 import com.ratpacksoftware.Models.Interaction;
 import com.ratpacksoftware.Models.VoteOption;
-import com.ratpacksoftware.Web.RequestHandlers.BeaconHandler;
-import com.ratpacksoftware.Web.RequestHandlers.RootHandler;
-import com.ratpacksoftware.Web.RequestHandlers.VoteHandler;
-import com.ratpacksoftware.Web.RequestHandlers.VoterHandler;
+import com.ratpacksoftware.Web.RequestHandlers.*;
 import com.ratpacksoftware.database.Database;
 import com.sun.net.httpserver.HttpServer;
 
@@ -66,6 +63,7 @@ public class EstelingServer {
         _httpServer.createContext("/api/beacons", _beaconHandler);
         _httpServer.createContext("/api/beacon", _beaconHandler);
         _httpServer.createContext("/api/beacon/interactions", _beaconHandler);
+        _httpServer.createContext("/interactions", new InteractionHandler());
 
         new File(dbPath).mkdir();
         _db = new Database(dbPath);
