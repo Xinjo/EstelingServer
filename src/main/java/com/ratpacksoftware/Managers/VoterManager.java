@@ -29,7 +29,7 @@ public class VoterManager {
 
     public Voter getVoterById(UUID voterId) {
         for(Voter v : _voters) {
-            if(v.id.equals(voterId)) {
+            if(v.getId().equals(voterId)) {
                 return v;
             }
         }
@@ -41,7 +41,7 @@ public class VoterManager {
         boolean exists = false;
 
         for(Voter v : voters) {
-            if(v.id.equals(voterUUID)) {
+            if(v.getId().equals(voterUUID)) {
                 exists = true;
             }
         }
@@ -56,6 +56,15 @@ public class VoterManager {
             return true;
         }
 
+        return false;
+    }
+
+    public boolean voterExists(Voter voter) {
+        for (Voter v : _voters) {
+            if(v.getId().equals(voter.getId())) {
+                return true;
+            }
+        }
         return false;
     }
 }

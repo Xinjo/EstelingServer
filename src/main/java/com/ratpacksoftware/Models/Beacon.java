@@ -4,14 +4,36 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by stijn on 31-5-2017.
+ * Created by Michel on 8-6-2017.
  */
 public class Beacon implements Serializable{
-    public Beacon(int id, ArrayList<Interaction> interactions) {
+    private String id;
+    private int discoveryRangeMeters;
+
+    public ArrayList<Interaction> interactions;
+
+
+    public Beacon(String id, int dicoveryRangeMeters) {
         this.id = id;
-        this.interactions = interactions;
+        this.interactions = new ArrayList<>();
+        this.discoveryRangeMeters = dicoveryRangeMeters;
     }
 
-    public int id;
-    public ArrayList<Interaction> interactions;
+    public String getId() {
+        return id;
+    }
+
+    public Interaction getInteractionById(String id) {
+        for (Interaction i : interactions) {
+            if(i.getId().equals(id))
+                return i;
+
+        }
+
+        return null;
+    }
+
+    public int getDiscoveryRangeMeters() {
+        return discoveryRangeMeters;
+    }
 }

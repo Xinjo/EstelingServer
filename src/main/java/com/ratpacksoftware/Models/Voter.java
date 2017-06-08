@@ -8,12 +8,11 @@ import java.util.UUID;
  * Created by stijn on 1-6-2017.
  */
 public class Voter implements Serializable{
-    public UUID id;
-    public ArrayList<Vote> votes = new ArrayList<>();
+    private UUID id;
+    private ArrayList<Vote> votes = new ArrayList<>();
 
     public Voter(UUID id) {
         this.id = id;
-        //send id to client
     }
 
     public UUID getId() {
@@ -28,11 +27,8 @@ public class Voter implements Serializable{
         return votes.get(index);
     }
 
-    public boolean addVote(int interactionId, int actionId) {
-        return votes.add(new Vote(interactionId, actionId, false));
+    public void addVote(Vote vote) {
+        votes.add(vote);
     }
 
-    public boolean addPersitantVote(int interactionId, int actionId) {
-        return votes.add(new Vote(interactionId, actionId, true));
-    }
 }

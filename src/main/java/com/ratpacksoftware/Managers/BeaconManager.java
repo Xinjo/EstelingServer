@@ -15,9 +15,9 @@ public class BeaconManager {
         _beacons = new ArrayList<>();
     }
 
-    public Beacon getBeaconById(int id) {
+    public Beacon getBeaconById(String id) {
         for(Beacon b : _beacons) {
-            if(b.id == id) {
+            if(b.getId().equals(id)) {
                 return b;
             }
         }
@@ -33,9 +33,17 @@ public class BeaconManager {
         _beacons.add(beacon);
     }
 
-    public ArrayList<Interaction> getInteractionsByBeaconId(int beaconId) {
-        Beacon b = getBeaconById(beaconId);
+    public ArrayList<Interaction> getInteractionsByBeaconId(String beaconId) {
+        return getBeaconById(beaconId).interactions;
+    }
 
-        return b.interactions;
+    public ArrayList<Beacon> getInRangeBeacons(int range) {
+        ArrayList<Beacon> tempBeacons = new ArrayList<>();
+        for(Beacon b : _beacons) {
+            if(b.getDiscoveryRangeMeters() <= range) {
+                tempBeacons.add(b);
+            }
+        }
+        return tempBeacons;
     }
 }
