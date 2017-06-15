@@ -13,7 +13,6 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
 
 /**
  * Created by Michel on 18-5-2017.
@@ -29,6 +28,7 @@ public class EstelingServer {
     private VoteHandler _voteHandler;
     private VoterHandler _voterHandler;
     private BeaconHandler _beaconHandler;
+    private InteractionHandler _interactionHandler;
 
     private Database _db;
 
@@ -36,8 +36,9 @@ public class EstelingServer {
         _voterManager = new VoterManager();
         _beaconManager = new BeaconManager();
         _voteManager = new VoteManager(_beaconManager, _voterManager);
+        _interactionHandler = new InteractionHandler(_beaconManager);
 
-        Beacon testBeacon = new Beacon("asd", 20);
+        Beacon testBeacon = new Beacon("MiniBeacon_11459", 20);
         Interaction lampInteraction = new Interaction("asd1", "Lamp");
         lampInteraction.addVoteOption(new VoteOption(0, "Rood"));
         lampInteraction.addVoteOption(new VoteOption(1, "Blauw"));
@@ -47,7 +48,14 @@ public class EstelingServer {
         testBeacon.interactions.add(new Interaction("asd3", "Kiezel"));
         testBeacon.interactions.add(new Interaction("asd4", "Achtbaan"));
         testBeacon.interactions.add(new Interaction("asd5", "Lamp 3"));
+        Beacon beaconasd = new Beacon("asd", 40);
+        Beacon beacondsa = new Beacon("dsa", 5.5);
+        Beacon beacontest = new Beacon("beacon", 50);
+
         _beaconManager.addBeacon(testBeacon);
+        _beaconManager.addBeacon(beaconasd);
+        _beaconManager.addBeacon(beacondsa);
+        _beaconManager.addBeacon(beacontest);
 
         _rootHandler = new RootHandler();
         _voteHandler = new VoteHandler(_voteManager, _beaconManager, _voterManager);
@@ -63,7 +71,7 @@ public class EstelingServer {
         _httpServer.createContext("/api/beacons", _beaconHandler);
         _httpServer.createContext("/api/beacon", _beaconHandler);
         _httpServer.createContext("/api/beacon/interactions", _beaconHandler);
-        _httpServer.createContext("/interactions", new InteractionHandler());
+        _httpServer.createContext("/interactions", _interactionHandler);
 
         new File(dbPath).mkdir();
         _db = new Database(dbPath);

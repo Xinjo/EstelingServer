@@ -3,9 +3,7 @@ package com.ratpacksoftware.Managers;
 import com.ratpacksoftware.Models.*;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by Michel on 19-5-2017.

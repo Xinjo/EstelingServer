@@ -39,13 +39,14 @@ public class BeaconManager {
         return getBeaconById(beaconId).interactions;
     }
 
-    public ArrayList<Beacon> getInRangeBeacons(int range) {
+    public ArrayList<Beacon> getInRangeBeacons(double range) {
         ArrayList<Beacon> tempBeacons = new ArrayList<>();
         for(Beacon b : _beacons) {
             if(b.getDiscoveryRangeMeters() <= range) {
                 tempBeacons.add(b);
             }
         }
+
         return tempBeacons;
     }
 

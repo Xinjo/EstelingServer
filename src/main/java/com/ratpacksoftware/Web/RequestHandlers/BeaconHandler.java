@@ -2,6 +2,7 @@ package com.ratpacksoftware.Web.RequestHandlers;
 
 import com.google.gson.Gson;
 import com.ratpacksoftware.Managers.BeaconManager;
+import com.ratpacksoftware.Models.Beacon;
 import com.ratpacksoftware.Web.Parsers.RequestParser;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -18,9 +19,13 @@ public class BeaconHandler implements HttpHandler {
     private BeaconManager _beaconManager;
     private RequestParser _requestParser;
 
+    private Gson gson;
+
     public BeaconHandler(BeaconManager beaconManager) {
         _beaconManager = beaconManager;
         _requestParser = new RequestParser();
+
+        this.gson = new Gson();
     }
 
     @Override
@@ -34,11 +39,14 @@ public class BeaconHandler implements HttpHandler {
             case "/api/beacons":
                 Map<String, String> queryArguments = _requestParser.parseQueryString(requestQuery);
 
-                //int range = Integer.parseInt(queryArguments.get("range"));
-                int range = 10;
+                double range = Double.parseDouble(queryArguments.get("range"));
 
-                response += new Gson().toJson(_beaconManager.getBeacons().get(0));
-                System.out.println(response);
+                for(Beacon b : _beaconManager.getInRangeBeacons(range))
+                    response += gson.toJson(b);
+
+                if(response.length() < 1) {
+                    response += "{ \"error\":\"No beacons in range\" }";
+                }
                 break;
             case "/api/beacon":
                 Map<String, String> result = _requestParser.parseQueryString(requestQuery);
@@ -46,6 +54,10 @@ public class BeaconHandler implements HttpHandler {
                 String beaconId = result.get("beaconId");
 
                 response += new Gson().toJson(_beaconManager.getBeaconById(beaconId));
+
+                if(response.length() < 1) {
+                    response +=  "{ \"error\":\"No beacon with that ID available\" }";
+                }
                 break;
         }
 

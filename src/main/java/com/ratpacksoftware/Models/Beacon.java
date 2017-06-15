@@ -8,15 +8,15 @@ import java.util.ArrayList;
  */
 public class Beacon implements Serializable{
     private String id;
-    private int discoveryRangeMeters;
+    private double discoveryRangeMeters;
 
     public ArrayList<Interaction> interactions;
 
 
-    public Beacon(String id, int dicoveryRangeMeters) {
+    public Beacon(String id, double discoveryRangeMeters) {
         this.id = id;
         this.interactions = new ArrayList<>();
-        this.discoveryRangeMeters = dicoveryRangeMeters;
+        this.discoveryRangeMeters = discoveryRangeMeters;
     }
 
     public String getId() {
@@ -33,7 +33,7 @@ public class Beacon implements Serializable{
         return null;
     }
 
-    public int getDiscoveryRangeMeters() {
+    public double getDiscoveryRangeMeters() {
         return discoveryRangeMeters;
     }
 }
