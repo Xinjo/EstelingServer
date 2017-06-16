@@ -1,5 +1,6 @@
 package com.ratpacksoftware.Managers;
 
+import com.ratpacksoftware.Models.Vote;
 import com.ratpacksoftware.Models.Voter;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class VoterManager {
 
     public boolean voterExists(Voter voter) {
         for (Voter v : _voters) {
-            if(v.getId().equals(voter.getId())) {
+            if (v.getId().equals(voter.getId())) {
                 return true;
             }
         }

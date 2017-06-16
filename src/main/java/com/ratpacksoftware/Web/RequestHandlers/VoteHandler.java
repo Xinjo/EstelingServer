@@ -35,26 +35,54 @@ public class VoteHandler implements HttpHandler {
         String requestPath = httpExchange.getRequestURI().getPath();
         String requestQuery = httpExchange.getRequestURI().getQuery();
 
-        String response = ":)";
+        String response = "";
+
+        String userId = "";
+        String beaconId = "";
+        String interactionId = "";
+        int voteOptionId = 0;
 
         switch(requestPath) {
             case "/api/vote/cast":
-                Map<String, String> result = _requestParser.parseQueryString(requestQuery);
+                Map<String, String> voteResult = _requestParser.parseQueryString(requestQuery);
 
-                String userId = result.get("userId");
-                String beaconId = result.get("beaconId");
-                String interactionId = result.get("interactionId");
-                int voteOptionId = Integer.parseInt(result.get("voteOptionId"));
+                userId = voteResult.get("userId");
+                beaconId = voteResult.get("beaconId");
+                interactionId = voteResult.get("interactionId");
+                voteOptionId = Integer.parseInt(voteResult.get("voteOptionId"));
 
-                Voter voter = _voterManager.getVoterById(UUID.fromString(userId));
+                Voter vVoter = _voterManager.getVoterById(UUID.fromString(userId));
 
-                if(_voterManager.voterExists(voter)) {
-                    Vote vote = _voteManager.castVote(voter.getId(), beaconId, interactionId, voteOptionId);
-                    voter.addVote(vote);
+                if(_voterManager.voterExists(vVoter)) {
+                    if(_voteManager.castVote(vVoter.getId(), beaconId, interactionId, voteOptionId)) {
+                        response += "{ \"success\" : \"Vote has been cast\" }";
+                    } else {
+                        response +=  "{ \"error\" : \"Vote has already been cast for this option\" }";
+                    }
+                } else {
+                    response +=  "{ \"error\" : \"No voter exists with that ID\" }";
                 }
 
                 break;
-            case "/api/vote/get":
+            case "api/vote/remove":
+                Map<String, String> removeResult = _requestParser.parseQueryString(requestQuery);
+
+                userId = removeResult.get("userId");
+                beaconId = removeResult.get("beaconId");
+                interactionId = removeResult.get("interactionId");
+                voteOptionId = Integer.parseInt(removeResult.get("voteOptionId"));
+
+                Voter rVoter = _voterManager.getVoterById(UUID.fromString(userId));
+
+                if(_voterManager.voterExists(rVoter)) {
+                    if(_voteManager.removeVote(rVoter.getId(), beaconId, interactionId, voteOptionId)) {
+                        response += "{ \"success\" : \"Vote removed\" }";
+                    } else {
+                        response +=  "{ \"error\" : \"Failed to remove vote\" }";
+                    }
+                } else {
+                    response +=  "{ \"error\" : \"No voter exists with that ID\" }";
+                }
                 break;
         }
 
